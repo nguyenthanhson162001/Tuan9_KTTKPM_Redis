@@ -26,12 +26,16 @@ import net.guides.springboot2.springboot2jpacrudexample.repository.EmployeeRepos
 public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	@GetMapping("/employees")
-	public Map<String, Employee> getAllEmployees() {
-	    employeeRepository.create(new Employee("Nguyen","Thanh","Son"));
+	@PostMapping("/employees")
+	public Map<String, Employee> createEmployeee(@Valid @RequestBody Employee employee) {
+	    employeeRepository.create(employee);
 
 		return employeeRepository.getAll();
 	}
+	@GetMapping("/employees")
+    public Map<String, Employee> getAllEmployees() {
+        return employeeRepository.getAll();
+    }
 //
 //	@GetMapping("/employees/{id}")
 //	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId)
